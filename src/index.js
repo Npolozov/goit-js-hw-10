@@ -1,0 +1,7 @@
+import './css/styles.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import debounce from 'lodash.debounce';
+
+const DEBOUNCE_DELAY = 300;
+
+fetch(`https://restcountries.com/v3.1/name/peru`);

@@ -20,7 +20,7 @@ refs.input.addEventListener('input', debounce(searchInput, DEBOUNCE_DELAY));
     const name = event.target.value.trim().toLowerCase();
     unsplash.getCountrybyName(name).then(data => {
       if (name === '') {
-        return (refs.countryList.innerHTML = ''), (refs.countryInfo.innerHTML = '');
+        return newList();
       }
     
       newList () 
@@ -36,11 +36,12 @@ refs.input.addEventListener('input', debounce(searchInput, DEBOUNCE_DELAY));
       } 
 
     }).catch(error => {
+      newList()
       Notify.failure('Oops, there is no country with that name');
     });
   }
   
-  function newList () {
+  function newList() {
     refs.countryWrapperRef.innerHTML ='';
     refs.countryInfo.innerHTML =''; 
   }

@@ -20,20 +20,19 @@ refs.input.addEventListener('input', debounce(searchInput, DEBOUNCE_DELAY));
     const name = event.target.value.trim().toLowerCase();
     unsplash.getCountrybyName(name).then(data => {
       if (name === '') {
-        return  newList () 
+        return (refs.countryList.innerHTML = ''), (refs.countryInfo.innerHTML = '');
       }
+    
       newList () 
       if(data.length === 1) {
         const murkupInfo = countryMurkUp(data);
         refs.countryInfo.insertAdjacentHTML('beforeend', murkupInfo);
-        const murkup = createMurkUp(data);
-        refs.countryWrapperRef.insertAdjacentHTML('beforeend', murkup);
+        firstMurkUp(data) 
       } else if (data.length >= 10){
         alertTooManyMatches() 
       }
       else   {
-        const murkup = createMurkUp(data);
-        refs.countryWrapperRef.insertAdjacentHTML('beforeend', murkup); 
+        firstMurkUp(data) 
       } 
 
     }).catch(error => {
@@ -49,5 +48,11 @@ refs.input.addEventListener('input', debounce(searchInput, DEBOUNCE_DELAY));
 
   function alertTooManyMatches() {
     Notify.info('Too many matches found. Please enter a more specific name.')
+  }
+
+  function firstMurkUp (data) {
+    const murkup = createMurkUp(data);
+    refs.countryWrapperRef.insertAdjacentHTML('beforeend', murkup); 
+
   }
   
